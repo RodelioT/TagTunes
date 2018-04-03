@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "ca.google.musicplayerexample"
+        applicationId "ca.google.TagTunes"
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
