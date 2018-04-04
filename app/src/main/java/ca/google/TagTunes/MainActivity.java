@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
@@ -169,19 +170,20 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
 
         // If there's music stored on the device
         if(musicCursor!=null && musicCursor.moveToFirst()){
-            //Gets song information
-            int titleColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Audio.Media.TITLE);
+            //Gets column information for song information
             int idColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Audio.Media._ID);
+            int pathColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Audio.Media.DATA);
+            int titleColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Audio.Media.TITLE);
             int artistColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Audio.Media.ARTIST);
 
-            // Adds song to list
+            // Adds songs to list
             do {
                 long thisId = musicCursor.getLong(idColumn);
                 String thisTitle = musicCursor.getString(titleColumn);
                 String thisArtist = musicCursor.getString(artistColumn);
-                songList.add(new Song(thisId, thisTitle, thisArtist));
-            }
-            while (musicCursor.moveToNext());
+                String thisPath = musicCursor.getString(pathColumn);
+                songList.add(new Song(thisId, thisTitle, thisArtist, thisPath));
+            } while (musicCursor.moveToNext());
         }
     }
 

@@ -48,13 +48,15 @@ public class SongAdapter extends BaseAdapter {
         // Get title and artist views
         TextView songView = songLayout.findViewById(R.id.song_title);
         TextView artistView = songLayout.findViewById(R.id.song_artist);
+        TextView pathView = songLayout.findViewById(R.id.song_path);
 
         // Get song using position
-        Song currSong = songs.get(position);
+        Song currentSong = songs.get(position);
 
         // Get title and artist strings
-        songView.setText(currSong.getTitle());
-        artistView.setText(currSong.getArtist());
+        songView.setText(currentSong.getTitle());
+        artistView.setText(currentSong.getArtist());
+        pathView.setText(currentSong.getPath());
 
         // Set index position as the tag
         songLayout.setTag(position);
