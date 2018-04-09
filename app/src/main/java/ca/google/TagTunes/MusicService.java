@@ -29,6 +29,7 @@ public class MusicService extends Service implements
     private final IBinder musicBind = new MusicBinder();
 
     private String songTitle = ";";
+    private String songArtist = ";";
     private static final int NOTIFY_ID=1;
 
     private boolean shuffle = false;
@@ -101,8 +102,8 @@ public class MusicService extends Service implements
                 .setSmallIcon(R.drawable.play)
                 .setTicker(songTitle)
                 .setOngoing(true)
-                .setContentTitle("\"Playing\"")
-                .setContentText(songTitle);
+                .setContentTitle(songTitle)
+                .setContentText(songArtist);
         Notification not = builder.build();
 
         startForeground(NOTIFY_ID, not);
@@ -133,6 +134,8 @@ public class MusicService extends Service implements
         Song playSong = songs.get(songPosn);
         // Gets the song title
         songTitle = playSong.getTitle();
+        // Sets the song artist
+        songArtist = playSong.getArtist();
         // Gets the ID of the song
         long currSong = playSong.getID();
         // Sets the Uri to the chosen song
