@@ -51,7 +51,7 @@ public class SongAdapter extends BaseAdapter {
         // Instantiates the dbHelper and assigns it a context
         dbHelper = new DatabaseHelper(context);
 
-        //map to song layout
+        // Map to song layout
         LinearLayout songLayout = (LinearLayout)songInf.inflate(R.layout.song, parent, false);
 
         // Get title and artist views

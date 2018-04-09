@@ -16,8 +16,10 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.MediaController;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -74,7 +76,38 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
         SongAdapter songAdt = new SongAdapter(this, songList);
         songView.setAdapter(songAdt);
 
+        // Sets up the music controls
         setController();
+
+        // Sets an on-click event listener for each item in the ListView
+        songView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                musicSrv.setSong(Integer.parseInt(view.getTag().toString()));
+                musicSrv.playSong();
+
+                if(playbackPaused){
+                    setController();
+                    playbackPaused=false;
+                }
+
+                controller.show(0);
+            }
+        });
+
+        // Sets an on-long-click event listener for each item in the ListView
+        songView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                // Gets the selected song
+                Song selectedSong= songList.get(position);
+                // Displays the path of the song in a Toast
+                Toast.makeText(MainActivity.this, selectedSong.getPath(), Toast.LENGTH_SHORT).show();
+
+                return true;
+            }
+        });
     }
 
     @Override
@@ -135,19 +168,6 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
             musicBound = false;
         }
     };
-
-    // When a song is selected
-    public void songPicked(View view){
-        musicSrv.setSong(Integer.parseInt(view.getTag().toString()));
-        musicSrv.playSong();
-
-        if(playbackPaused){
-            setController();
-            playbackPaused=false;
-        }
-
-        controller.show(0);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
