@@ -13,6 +13,9 @@ import java.util.Map;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    // Database Version
+    private static final int DB_VERSION = 3;
+
     // Database Name
     private static final String DB_NAME = "SongDatabase";
 
@@ -21,14 +24,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Constants for Column Names
     private static final String COL_FILEPATH = "FilePath";
+    private static final String COL_TITLE = "Title";
+    private static final String COL_ARTIST = "Artist";
     private static final String COL_COMMENT = "Comment";
-
-    // Database Version
-    private static final int DB_VERSION = 1;
 
     // Defining the create statement
     private static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME + " (" +
-                                                COL_FILEPATH + " TEXT NOT NULL, " +
+                                                COL_FILEPATH + " TEXT UNIQUE NOT NULL, " +
+                                                COL_TITLE + " TEXT NOT NULL, " +
+                                                COL_ARTIST + " TEXT, " +
                                                 COL_COMMENT + " TEXT);";
 
     // Defining the destroy statement
@@ -55,8 +59,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // Inserts a song into the database
-    public void insertSong(String filePath, String comment) {
+    // Inserts a song into the database using ContentValues
+    public void insertSong(String filePath,String title, String artist, String comment) {
         // Get an instance of the writable database
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -66,7 +70,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // Add values to the ContentValues
         rowValues.put(COL_FILEPATH, filePath);
+        rowValues.put(COL_TITLE, title);
+        rowValues.put(COL_ARTIST, artist);
         rowValues.put(COL_COMMENT, comment);
+
 
         // Insert the values into the table
         db.insert(TABLE_NAME, null, rowValues);
@@ -74,46 +81,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Close the database
         db.close();
     }
-
-//    // Load the data in the Database
-//    public ArrayList<String> loadDataSimple() {
-//
-//        ArrayList<String> songData = new ArrayList<>();
-//
-//        // Open the readable Database
-//        SQLiteDatabase db = this.getReadableDatabase();
-//
-//        // Create an array of the table names
-//        String[] selection = {COL_FILEPATH, COL_COMMENT};
-//
-//        // Create a cursor item for querying the database
-//        Cursor c = db.query(TABLE_NAME,	//The name of the table to query
-//                selection,				//The columns to return
-//                null,		    //The columns for the where clause
-//                null,		//The values for the where clause
-//                null,			//Group the rows
-//                null,			//Filter the row groups
-//                null);			//The sort order
-//
-//        // Move to the first row
-//        c.moveToFirst();
-//
-//        // For each row that was retrieved
-//        for(int i=0; i < c.getCount(); i++)
-//        {
-//            // Assign the value to the corresponding array
-//            songData.add(c.getString(0));
-//            c.moveToNext();
-//        }
-//
-//        // Close the cursor
-//        c.close();
-//
-//        // Close the database
-//        db.close();
-//
-//        return songData;
-//    }
 
     // This method is used to load the data from the table into a hash map
     //   This enables the use of multiple textviews in the listview
@@ -124,7 +91,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Open the readable database
         SQLiteDatabase db = this.getReadableDatabase();
         // Create an array of the column names
-        String[] selection = {COL_FILEPATH, COL_COMMENT};
+        String[] selection = {COL_FILEPATH, COL_TITLE, COL_ARTIST, COL_COMMENT};
         // Create a cursor item for querying the database
         Cursor c = db.query(TABLE_NAME,	//The name of the table to query
                 selection,				//The columns to return
@@ -144,8 +111,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             // Assign the value to the corresponding array
             map.put("FilePath", c.getString(0));
-            map.put("Comment", c.getString(1));
-            // map.put("Age", String.valueOf(c.getInt(1)));  //For integer values
+            map.put("Title", c.getString(1));
+            map.put("Artist", c.getString(2));
+            map.put("Comment", c.getString(3));
+            // map.put("Age", String.valueOf(c.getInt(#)));  //For integer values
 
             lm.add(map);
             c.moveToNext();
@@ -159,4 +128,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return lm;
     }
+
 }

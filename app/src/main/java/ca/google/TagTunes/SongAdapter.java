@@ -53,7 +53,7 @@ public class SongAdapter extends BaseAdapter {
         // Get song using position
         Song currentSong = songs.get(position);
 
-        // Get title and artist strings
+        // Sets the text for the views
         songView.setText(currentSong.getTitle());
         artistView.setText(currentSong.getArtist());
         pathView.setText(currentSong.getPath());
