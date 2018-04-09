@@ -30,7 +30,7 @@ public class MusicService extends Service implements
 
     private String songTitle = ";";
     private String songArtist = ";";
-    private static final int NOTIFY_ID=1;
+    private static final int NOTIFY_ID = 1;
 
     private boolean shuffle = false;
     private Random rand;

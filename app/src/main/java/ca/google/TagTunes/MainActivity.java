@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.MediaController;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,7 +57,7 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
         songView = findViewById(R.id.song_list);
 
         // Instantiate the song ArrayList
-        songList = new ArrayList<Song>();
+        songList = new ArrayList<>();
 
         // Get all songs on the device
         getSongList();
@@ -190,7 +189,7 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
                 String thisPath = musicCursor.getString(pathColumn);
                 songList.add(new Song(thisId, thisTitle, thisArtist, thisPath));
 
-                dbHelper.insertSong(thisPath, thisTitle, thisArtist, "no_comment");
+                dbHelper.insertSong(thisPath, thisTitle, thisArtist, "no comment");
             } while (musicCursor.moveToNext());
         }
     }

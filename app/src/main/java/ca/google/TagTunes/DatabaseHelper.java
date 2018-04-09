@@ -129,4 +129,53 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return lm;
     }
 
+    // This method is used to fetch a song title using its filePath
+    public String getSongComment(String filePath)
+    {
+        List<Map<String,String>> lm = new ArrayList<>();
+
+        // Open the readable database
+        SQLiteDatabase db = this.getReadableDatabase();
+        // Create an array of the column names
+        String[] selectClause = {COL_COMMENT};
+        // Create a String array for the where clause
+        String[] whereClause = {filePath};
+        // Create a cursor item for querying the database
+        Cursor c = db.query(TABLE_NAME,	//The name of the table to query
+                selectClause,				//The columns to return
+                "FilePath=?",			//The columns for the where clause
+                whereClause,		//The values for the where clause
+                null,			//Group the rows
+                null,			//Filter the row groups
+                null);			//The sort order
+
+        // Make sure it returned at least 1 row before doing operations on the result
+        if(c.getCount() > 0){
+            // Move to the first row
+            c.moveToFirst();
+
+            // For each row that was retrieved
+            for(int i=0; i < c.getCount(); i++) {
+                Map<String,String> map = new HashMap<>();
+
+                // Assign the value to the corresponding array
+//                map.put("FilePath", c.getString(0));
+//                map.put("Title", c.getString(1));
+                map.put("FilePath", c.getString(0));
+//                map.put("Comment", c.getString(3));
+                // map.put("Age", String.valueOf(c.getInt(1)));  //For integer values
+
+                lm.add(map);
+                c.moveToNext();
+            }
+        }
+
+        // Close the cursor
+        c.close();
+
+        // Close the database
+        db.close();
+
+        return (c.getCount() > 0) ? lm.get(0).get("FilePath") : "nothing";
+    }
 }
