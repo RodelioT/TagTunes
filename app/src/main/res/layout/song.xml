@@ -10,7 +10,7 @@
         android:id="@+id/song_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="#FFFFFF88"
+        android:textColor="#FFE26ED8"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -18,12 +18,13 @@
         android:id="@+id/song_artist"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="#FFFFFF88"
+        android:textColor="#FFE26ED8"
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/song_path"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFFFF"/>
 
 </LinearLayout>

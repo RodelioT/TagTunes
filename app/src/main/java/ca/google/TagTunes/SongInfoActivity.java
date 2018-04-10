@@ -11,6 +11,9 @@ public class SongInfoActivity extends AppCompatActivity {
 
     TextView tvSongInfo;
     EditText etComment;
+
+    String songPath, songTitle, songArtist;
+
     DatabaseHelper dbHelper;  // Will be needed later for writing to the database (also needs to be edited in dbHelper class)
 
     @Override
@@ -23,12 +26,25 @@ public class SongInfoActivity extends AppCompatActivity {
         tvSongInfo = findViewById(R.id.tvSongInfo);
         etComment = findViewById(R.id.etComment);
 
-        String songPath = getIntent().getStringExtra("songPath");
-        String songTitle = getIntent().getStringExtra("songTitle");
-        String songArtist = getIntent().getStringExtra("songArtist");
+        songPath = getIntent().getStringExtra("songPath");
+        songTitle = getIntent().getStringExtra("songTitle");
+        songArtist = getIntent().getStringExtra("songArtist");
+
+        String songComment = dbHelper.getSong(songPath).get("Comment");
 
         tvSongInfo.setText(songArtist + " - " + songTitle);
 
-        etComment.setText(dbHelper.getSongComment(songPath));
+        etComment.setText(songComment);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        dbHelper = new DatabaseHelper(this);
+
+        String updatedComment = etComment.getText().toString();
+        dbHelper.updateComment(updatedComment, songPath);
+
+        finish();
     }
 }

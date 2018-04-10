@@ -83,7 +83,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // This method is used to load the data from the table into a hash map
-    //   This enables the use of multiple textviews in the listview
+    //   This enables the use of multiple TextViews in the ListView
     public List<Map<String,String>> loadData()
     {
         List<Map<String,String>> lm = new ArrayList<>();
@@ -129,22 +129,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return lm;
     }
 
-    // This method is used to fetch a song title using its filePath
-    public String getSongComment(String filePath)
+    // This method is used to fetch a song using its filePath
+    public Map<String,String> getSong(String filePath)
     {
         List<Map<String,String>> lm = new ArrayList<>();
 
         // Open the readable database
         SQLiteDatabase db = this.getReadableDatabase();
-        // Create an array of the column names
-        String[] selectClause = {COL_COMMENT};
-        // Create a String array for the where clause
-        String[] whereClause = {filePath};
+
+        String[] selectClause = {COL_FILEPATH, COL_TITLE, COL_ARTIST, COL_COMMENT}; // Create an array of the column names
+        String[] whereClause = {filePath};                                          // Create a String array for the where clause
+
+
         // Create a cursor item for querying the database
         Cursor c = db.query(TABLE_NAME,	//The name of the table to query
-                selectClause,				//The columns to return
-                "FilePath=?",			//The columns for the where clause
-                whereClause,		//The values for the where clause
+                selectClause,			//The columns to return
+                "FilePath=?",	//The columns for the where clause
+                whereClause,		    //The values for the where clause
                 null,			//Group the rows
                 null,			//Filter the row groups
                 null);			//The sort order
@@ -154,20 +155,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             // Move to the first row
             c.moveToFirst();
 
-            // For each row that was retrieved
-            for(int i=0; i < c.getCount(); i++) {
-                Map<String,String> map = new HashMap<>();
 
-                // Assign the value to the corresponding array
-//                map.put("FilePath", c.getString(0));
-//                map.put("Title", c.getString(1));
+            Map<String,String> map = new HashMap<>();
+
+            // Assign the value to the corresponding array
                 map.put("FilePath", c.getString(0));
-//                map.put("Comment", c.getString(3));
-                // map.put("Age", String.valueOf(c.getInt(1)));  //For integer values
+                map.put("Title", c.getString(1));
+                map.put("Artist", c.getString(2));
+                map.put("Comment", c.getString(3));
+                // map.put("Age", String.valueOf(c.getInt(#)));  //For integer values
 
-                lm.add(map);
-                c.moveToNext();
-            }
+            lm.add(map);
+            c.moveToNext();
         }
 
         // Close the cursor
@@ -176,6 +175,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Close the database
         db.close();
 
-        return (c.getCount() > 0) ? lm.get(0).get("FilePath") : "nothing";
+        return lm.get(0);
+    }
+
+    public void updateComment(String comment, String filePath)
+    {
+        // Open the readable database
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "UPDATE " + TABLE_NAME +
+                       " SET " + COL_COMMENT  + " = '" + comment +
+                       "' WHERE " + COL_FILEPATH + " = '" + filePath + "';";
+
+        db.execSQL(query);
+
+        // Close the database
+        db.close();
     }
 }

@@ -65,7 +65,7 @@ public class SongAdapter extends BaseAdapter {
         // Sets the text for the views
         songView.setText(currentSong.getTitle());
         artistView.setText(currentSong.getArtist());
-        pathView.setText(dbHelper.getSongComment(currentSong.getPath()));
+        pathView.setText(dbHelper.getSong(currentSong.getPath()).get("Comment"));
 
         // Set index position as the tag
         songLayout.setTag(position);
