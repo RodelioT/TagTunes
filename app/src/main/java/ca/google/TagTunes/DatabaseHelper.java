@@ -64,7 +64,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Get an instance of the writable database
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // Create an instance of a writable Databse
+        // Create an instance of a writable Database
         //   ContentValues class is used to store sets of values that are easier to process
         ContentValues rowValues = new ContentValues();
 

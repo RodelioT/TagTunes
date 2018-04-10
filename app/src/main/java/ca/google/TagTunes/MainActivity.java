@@ -106,8 +106,8 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
                 //Starts a new intent to view the selected song details
                 Intent songInfoIntent = new Intent(getBaseContext(), SongInfoActivity.class);
                 songInfoIntent.putExtra("songPath", selectedSong.getPath());
-                songInfoIntent.putExtra("songTitle", selectedSong.getTitle());
-                songInfoIntent.putExtra("songArtist", selectedSong.getArtist());
+//                songInfoIntent.putExtra("songTitle", selectedSong.getTitle());
+//                songInfoIntent.putExtra("songArtist", selectedSong.getArtist());
                 startActivity(songInfoIntent);
 
                 return true;
@@ -134,6 +134,8 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
             setController();
             paused = false;
         }
+
+        //TODO: update the comments when the user returns back here
     }
 
     @Override
@@ -214,7 +216,7 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
                 String thisPath = musicCursor.getString(pathColumn);
                 songList.add(new Song(thisId, thisTitle, thisArtist, thisPath));
 
-                dbHelper.insertSong(thisPath, thisTitle, thisArtist, "no comment");
+                dbHelper.insertSong(thisPath, thisTitle, thisArtist, "[no comment]");
             } while (musicCursor.moveToNext());
         }
     }
