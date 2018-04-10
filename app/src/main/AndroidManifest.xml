@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ca.google.TagTunes">
 
-    <!--Requires read and write permissions, and wake_lock, which allows music playback when the phone goes to sleep-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!-- Requires read and write permissions, and wake_lock, which allows music playback when the phone goes to sleep -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
@@ -14,10 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="ca.google.TagTunes.MainActivity"
-                  android:label="@string/app_name"
-                  android:launchMode="singleTop"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,9 +26,10 @@
             </intent-filter>
         </activity>
 
-        <!--MusicService is required (make sure the package reflects your project's)-->
-        <service android:name="ca.google.TagTunes.MusicService" />
+        <!-- MusicService is required (make sure the package reflects your project's) -->
+        <service android:name=".MusicService" />
 
+        <activity android:name=".SongInfoActivity"></activity>
     </application>
 
 </manifest>

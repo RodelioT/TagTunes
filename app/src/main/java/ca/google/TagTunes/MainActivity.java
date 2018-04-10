@@ -102,8 +102,13 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 // Gets the selected song
                 Song selectedSong= songList.get(position);
-                // Displays the path of the song in a Toast
-                Toast.makeText(MainActivity.this, selectedSong.getPath(), Toast.LENGTH_SHORT).show();
+
+                //Starts a new intent to view the selected song details
+                Intent songInfoIntent = new Intent(getBaseContext(), SongInfoActivity.class);
+                songInfoIntent.putExtra("songPath", selectedSong.getPath());
+                songInfoIntent.putExtra("songTitle", selectedSong.getTitle());
+                songInfoIntent.putExtra("songArtist", selectedSong.getArtist());
+                startActivity(songInfoIntent);
 
                 return true;
             }
