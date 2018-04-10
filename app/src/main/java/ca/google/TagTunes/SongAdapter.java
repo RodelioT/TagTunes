@@ -16,10 +16,15 @@ public class SongAdapter extends BaseAdapter {
     private ArrayList<Song> songs;
     private LayoutInflater songInf;
 
+    private Context context;
+    private DatabaseHelper dbHelper;
+
     // Constructor
     public SongAdapter(Context c, ArrayList<Song> theSongs){
         songs=theSongs;
         songInf=LayoutInflater.from(c);
+
+        this.context = c;
     }
 
     @Override
@@ -42,7 +47,11 @@ public class SongAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //map to song layout
+
+        // Instantiates the dbHelper and assigns it a context
+        dbHelper = new DatabaseHelper(context);
+
+        // Map to song layout
         LinearLayout songLayout = (LinearLayout)songInf.inflate(R.layout.song, parent, false);
 
         // Get title and artist views
@@ -53,10 +62,10 @@ public class SongAdapter extends BaseAdapter {
         // Get song using position
         Song currentSong = songs.get(position);
 
-        // Get title and artist strings
+        // Sets the text for the views
         songView.setText(currentSong.getTitle());
         artistView.setText(currentSong.getArtist());
-        pathView.setText(currentSong.getPath());
+        pathView.setText(dbHelper.getSong(currentSong.getPath()).get("Comment"));
 
         // Set index position as the tag
         songLayout.setTag(position);

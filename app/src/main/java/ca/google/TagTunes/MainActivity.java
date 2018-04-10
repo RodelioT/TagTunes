@@ -16,8 +16,10 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.MediaController;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,6 +38,8 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
 
     private boolean paused, playbackPaused = false;
 
+    private DatabaseHelper dbHelper; // Handles database operations
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,10 +53,13 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
             }
         }
 
+        // Initialize the dbHelper
+        dbHelper = new DatabaseHelper(this);
+
         songView = findViewById(R.id.song_list);
 
         // Instantiate the song ArrayList
-        songList = new ArrayList<Song>();
+        songList = new ArrayList<>();
 
         // Get all songs on the device
         getSongList();
@@ -69,7 +76,43 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
         SongAdapter songAdt = new SongAdapter(this, songList);
         songView.setAdapter(songAdt);
 
+        // Sets up the music controls
         setController();
+
+        // Sets an on-click event listener for each item in the ListView
+        songView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                musicSrv.setSong(Integer.parseInt(view.getTag().toString()));
+                musicSrv.playSong();
+
+                if(playbackPaused){
+                    setController();
+                    playbackPaused=false;
+                }
+
+                controller.show(0);
+            }
+        });
+
+        // Sets an on-long-click event listener for each item in the ListView
+        songView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                // Gets the selected song
+                Song selectedSong= songList.get(position);
+
+                //Starts a new intent to view the selected song details
+                Intent songInfoIntent = new Intent(getBaseContext(), SongInfoActivity.class);
+                songInfoIntent.putExtra("songPath", selectedSong.getPath());
+                songInfoIntent.putExtra("songTitle", selectedSong.getTitle());
+                songInfoIntent.putExtra("songArtist", selectedSong.getArtist());
+                startActivity(songInfoIntent);
+
+                return true;
+            }
+        });
     }
 
     @Override
@@ -131,19 +174,6 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
         }
     };
 
-    // When a song is selected
-    public void songPicked(View view){
-        musicSrv.setSong(Integer.parseInt(view.getTag().toString()));
-        musicSrv.playSong();
-
-        if(playbackPaused){
-            setController();
-            playbackPaused=false;
-        }
-
-        controller.show(0);
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //menu item selected
@@ -183,6 +213,8 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
                 String thisArtist = musicCursor.getString(artistColumn);
                 String thisPath = musicCursor.getString(pathColumn);
                 songList.add(new Song(thisId, thisTitle, thisArtist, thisPath));
+
+                dbHelper.insertSong(thisPath, thisTitle, thisArtist, "no comment");
             } while (musicCursor.moveToNext());
         }
     }
