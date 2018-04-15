@@ -14,6 +14,8 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,11 +27,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class MainActivity extends Activity implements MediaController.MediaPlayerControl {
+public class MainActivity extends AppCompatActivity implements MediaController.MediaPlayerControl {
 
     private ArrayList<Song> songList; // ArrayList to hold all discovered music on the device
     private ListView songView; // ListView to display all the songs
     private SongAdapter songAdt; // Adapter of the ListView. Used to refresh the list when changes are made.
+
+    private Toolbar myToolbar;
 
     private MusicService musicSrv; // Represents the custom class we created
     private Intent playIntent; // The intent to play music within the MusicService class
@@ -54,9 +58,14 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
             }
         }
 
-        // Initialize the dbHelper
+        // Initialize the dbHelper class
         dbHelper = new DatabaseHelper(this);
 
+        // Initializing the appbar
+        myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+
+        // Initializing the ListView
         songView = findViewById(R.id.song_list);
 
         // Instantiate the song ArrayList
