@@ -134,8 +134,6 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
             setController();
             paused = false;
         }
-
-        //TODO: update the comments when the user returns back here
     }
 
     @Override
@@ -216,7 +214,7 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
                 String thisPath = musicCursor.getString(pathColumn);
                 songList.add(new Song(thisId, thisTitle, thisArtist, thisPath));
 
-                dbHelper.insertSong(thisPath, thisTitle, thisArtist, "[no comment]");
+                dbHelper.insertSong(thisPath, thisTitle, thisArtist);
             } while (musicCursor.moveToNext());
         }
     }

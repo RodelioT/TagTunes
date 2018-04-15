@@ -1,18 +1,19 @@
 package ca.google.TagTunes;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.Arrays;
 
 public class SongInfoActivity extends AppCompatActivity {
 
     TextView tvSongInfo;
-    EditText etComment;
+    EditText etTags;
 
-    String songPath, songTitle, songArtist, songComment;
+    String songPath, songTitle, songArtist, songTags;
+    String[] tagList;
 
     DatabaseHelper dbHelper;
 
@@ -26,7 +27,7 @@ public class SongInfoActivity extends AppCompatActivity {
 
         // Initializing views
         tvSongInfo = findViewById(R.id.tvSongInfo);
-        etComment = findViewById(R.id.etComment);
+        etTags = findViewById(R.id.etTags);
 
         // Getting the song path passed through the intent
         songPath = getIntent().getStringExtra("songPath");
@@ -34,13 +35,20 @@ public class SongInfoActivity extends AppCompatActivity {
         // Getting the song data using the filePath, via dbHelper
         songTitle = dbHelper.getSong(songPath).get("Title");
         songArtist = dbHelper.getSong(songPath).get("Artist");
-        songComment = dbHelper.getSong(songPath).get("Comment");
+
+        //Getting all the tags, separating them with a space
+        tagList = (String[]) dbHelper.getTags(songPath).get(0).values().toArray();
+        for (String tag : tagList) {
+            // Tags should use underscores with spaces. Does a replace if they have spaces
+            tag = tag.replace(" ", "_");
+            songTags += tag + " ";
+        }
 
         // Sets the text to the song information
         tvSongInfo.setText(songArtist + " - " + songTitle);
 
-        // Sets the comment text to the comment that was retrieved from the database
-        etComment.setText(songComment);
+        // Lists all the tags in the tags editText (tags separated with spaces)
+        etTags.setText(songTags);
     }
 
     @Override
@@ -48,11 +56,13 @@ public class SongInfoActivity extends AppCompatActivity {
         // Initializing the dbHelper used to update the song's comment in the database
         dbHelper = new DatabaseHelper(this);
 
-        // Gets the current comment text in the View
-        String updatedComment = etComment.getText().toString();
+        // Gets the list of tags currently in the EditText, splits them by space,
+        //   and puts them all into an array
+        String[] tagArray = etTags.getText().toString().split(" ");
 
-        //Updates the comment in the database with what was entered in the View
-        dbHelper.updateComment(updatedComment, songPath);
+        for (String tag : tagArray) {
+            dbHelper.insertTag(tag, songPath);
+        }
 
         // Action performed when pressing the back button
         finish();

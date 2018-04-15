@@ -22,9 +22,9 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/song_path"
+        android:id="@+id/song_tags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#FFFFFFFF"/>
+        android:textColor="#FFFFFFFF" />
 
 </LinearLayout>
