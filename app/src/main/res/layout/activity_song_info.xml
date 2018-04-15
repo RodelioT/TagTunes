@@ -23,7 +23,7 @@
             android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/etComment"
+            android:id="@+id/etTags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
