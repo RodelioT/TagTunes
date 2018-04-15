@@ -14,7 +14,7 @@ import java.util.Map;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DB_VERSION = 4;
+    private static final int DB_VERSION = 6;
 
     // Database Name
     private static final String DB_NAME = "SongDatabase";
@@ -43,11 +43,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Defining the create statement for SongTags
     private static final String TABLE_SONGTAGS_CREATE = "CREATE TABLE " + TABLE_NAME_SONGTAGS + " (" +
             COL_SONGTAGS_FILEPATH + " TEXT NOT NULL, " +
-            COL_SONGTAGS_NAME + " TEXT NOT NULL);";
+            COL_SONGTAGS_NAME + " TEXT NOT NULL, " +
+            "PRIMARY KEY(" + COL_SONGTAGS_FILEPATH + ", " + COL_SONGTAGS_NAME + "));";
 
     // Defining the create statement for Tags
     private static final String TABLE_TAGS_CREATE = "CREATE TABLE " + TABLE_NAME_TAGS + " (" +
-            COL_TAGS_NAME + "TEXT UNIQUE NOT NULL);";
+            COL_TAGS_NAME + " TEXT UNIQUE NOT NULL);";
 
 
 
@@ -96,17 +97,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Get an instance of the writable database
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // Create an instance of a writable Database
-        //   ContentValues class is used to store sets of values that are easier to process
-        ContentValues rowValues = new ContentValues();
+        // ContentValues class is used to store sets of values that are easier to process
+        // Two is created for each Song and SongTags tables
+        ContentValues songRowValues = new ContentValues();
+        ContentValues songtagRowValues = new ContentValues();
 
         // Add values to the ContentValues
-        rowValues.put(COL_SONGS_FILEPATH, filePath);
-        rowValues.put(COL_SONGS_TITLE, title);
-        rowValues.put(COL_SONGS_ARTIST, artist);
+        songRowValues.put(COL_SONGS_FILEPATH, filePath);
+        songRowValues.put(COL_SONGS_TITLE, title);
+        songRowValues.put(COL_SONGS_ARTIST, artist);
+        // Gives an initial tag to the song
+        songtagRowValues.put(COL_SONGTAGS_FILEPATH, filePath);
+        songtagRowValues.put(COL_SONGTAGS_NAME, "tag_me");
 
         // Insert the values into the Songs table
-        db.insert(TABLE_NAME_SONGS, null, rowValues);
+        db.insert(TABLE_NAME_SONGS, null, songRowValues);
+        db.insert(TABLE_NAME_SONGTAGS, null, songtagRowValues);
 
         // Close the database
         db.close();
@@ -249,55 +255,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return lm.get(0);
     }
 
-//    // Old method to fetch a song INCLUDING comment, which is gone
-//    public Map<String,String> getSongOld(String filePath)
-//    {
-//        List<Map<String,String>> lm = new ArrayList<>();
-//
-//        // Open the readable database
-//        SQLiteDatabase db = this.getReadableDatabase();
-//
-//        String[] selectClause = {COL_SONGS_FILEPATH, COL_SONGS_TITLE, COL_SONGS_ARTIST}; // Create an array of the column names
-//        String[] whereClause = {filePath};                                          // Create a String array for the where clause
-//
-//
-//        // Create a cursor item for querying the database
-//        Cursor c = db.query(TABLE_NAME_SONGS,	//The name of the table to query
-//                selectClause,			//The columns to return
-//                "FilePath=?",	//The columns for the where clause
-//                whereClause,		    //The values for the where clause
-//                null,			//Group the rows
-//                null,			//Filter the row groups
-//                null);			//The sort order
-//
-//        // Make sure it returned at least 1 row before doing operations on the result
-//        if(c.getCount() > 0){
-//            // Move to the first row
-//            c.moveToFirst();
-//
-//
-//            Map<String,String> map = new HashMap<>();
-//
-//            // Assign the value to the corresponding array
-//            map.put("FilePath", c.getString(0));
-//            map.put("Title", c.getString(1));
-//            map.put("Artist", c.getString(2));
-//            // TODO: get tags
-//            // map.put("Age", String.valueOf(c.getInt(#)));  //For integer values
-//
-//            lm.add(map);
-//            c.moveToNext();
-//        }
-//
-//        // Close the cursor
-//        c.close();
-//
-//        // Close the database
-//        db.close();
-//
-//        return lm.get(0);
-//    }
-
     // This method is used to return all tags associated with a song(its filepath)
     public List<Map<String,String>> getTags(String filepath)
     {
@@ -306,15 +263,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Open the readable database
         SQLiteDatabase db = this.getReadableDatabase();
 
-        // Does a three-way join between the Tags, SongTags and Songs tables (many-to-many relationship)
-        //   and selects all tags associated with one song (given the SongPath)
-        Cursor c = db.rawQuery("SELECT t." + COL_TAGS_NAME +
-                                    " FROM " + TABLE_NAME_TAGS + " as 't' " +
-                                    " INNER JOIN " + TABLE_NAME_SONGTAGS + " as 'st' " +
-                                        " ON t." + COL_TAGS_NAME + " = st." + COL_SONGTAGS_NAME +
-                                    " INNER JOIN " + TABLE_NAME_SONGS + " as 's' " +
-                                        " ON s." + COL_SONGS_FILEPATH + " = st." + COL_SONGTAGS_FILEPATH +
-                                    " WHERE s." + COL_SONGS_FILEPATH + " = '" + filepath + "';", null);
+        // Selects all the tag names where the song (filepath) matches the song given
+        Cursor c = db.rawQuery("SELECT Name " +
+                                    "FROM SongTags " +
+                                    "WHERE FilePath = '" + filepath + "';", null);
+
+//        Cursor c = db.rawQuery("SELECT Tags.Name " +
+//                "FROM Tags INNER JOIN SongTags ON Tags.Name = SongTags.Name " +
+//                "INNER JOIN Songs ON Songs.FilePath = SongTags.FilePath " +
+//                "WHERE Songs.FilePath = '" + filepath + "';", null);
+
+//        // Does a three-way join between the Tags, SongTags and Songs tables (many-to-many relationship)
+//        //   and selects all tags associated with one song (given the SongPath)
+//        Cursor c = db.rawQuery("SELECT t." + COL_TAGS_NAME +
+//                " FROM " + TABLE_NAME_TAGS + " as 't'" +
+//                " INNER JOIN " + TABLE_NAME_SONGTAGS + " as 'st'" +
+//                " ON t." + COL_TAGS_NAME + " = st." + COL_SONGTAGS_NAME +
+//                " INNER JOIN " + TABLE_NAME_SONGS + " as 's' " +
+//                " ON s." + COL_SONGS_FILEPATH + " = st." + COL_SONGTAGS_FILEPATH +
+//                " WHERE s." + COL_SONGS_FILEPATH + " = '" + filepath + "';", null);
 
 
         // Make sure it returned at least 1 row before doing operations on the result
@@ -344,21 +311,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return lm;
     }
-
-
-//    // Updates a Song's comment, using the given filepath (TODO:Soon to be deleted)
-//    public void updateComment(String comment, String filePath)
-//    {
-//        // Open the readable database
-//        SQLiteDatabase db = this.getReadableDatabase();
-//
-//        String query = "UPDATE " + TABLE_NAME_SONGS +
-//                       " SET " + COL_SONGS_COMMENT + " = '" + comment +
-//                       "' WHERE " + COL_SONGS_FILEPATH + " = '" + filePath + "';";
-//
-//        db.execSQL(query);
-//
-//        // Close the database
-//        db.close();
-//    }
 }

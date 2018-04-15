@@ -12,7 +12,8 @@ public class SongInfoActivity extends AppCompatActivity {
     TextView tvSongInfo;
     EditText etTags;
 
-    String songPath, songTitle, songArtist, songTags;
+    String songPath, songTitle, songArtist;
+    String songTags = "";
     String[] tagList;
 
     DatabaseHelper dbHelper;
@@ -37,7 +38,8 @@ public class SongInfoActivity extends AppCompatActivity {
         songArtist = dbHelper.getSong(songPath).get("Artist");
 
         //Getting all the tags, separating them with a space
-        tagList = (String[]) dbHelper.getTags(songPath).get(0).values().toArray();
+        Object[] tagArray = dbHelper.getTags(songPath).get(0).values().toArray();
+        tagList = Arrays.copyOf(tagArray, tagArray.length, String[].class);
         for (String tag : tagList) {
             // Tags should use underscores with spaces. Does a replace if they have spaces
             tag = tag.replace(" ", "_");
