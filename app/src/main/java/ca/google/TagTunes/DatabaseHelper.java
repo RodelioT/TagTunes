@@ -28,7 +28,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COL_SONGS_FILEPATH = "FilePath";
     private static final String COL_SONGS_TITLE = "Title";
     private static final String COL_SONGS_ARTIST = "Artist";
-    private static final String COL_SONGS_COMMENT = "Comment";
     private static final String COL_SONGTAGS_FILEPATH = "FilePath";
     private static final String COL_SONGTAGS_NAME = "Name";
     private static final String COL_TAGS_NAME = "Name";
@@ -39,8 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_SONGS_CREATE = "CREATE TABLE " + TABLE_NAME_SONGS + " (" +
             COL_SONGS_FILEPATH + " TEXT UNIQUE NOT NULL, " +
             COL_SONGS_TITLE + " TEXT NOT NULL, " +
-            COL_SONGS_ARTIST + " TEXT, " +
-            COL_SONGS_COMMENT + " TEXT);";
+            COL_SONGS_ARTIST + " TEXT);";
 
     // Defining the create statement for SongTags
     private static final String TABLE_SONGTAGS_CREATE = "CREATE TABLE " + TABLE_NAME_SONGTAGS + " (" +
@@ -94,7 +92,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     // Inserts a song into the Songs table using ContentValues
-    public void insertSong(String filePath,String title, String artist, String comment) {
+    public void insertSong(String filePath,String title, String artist) {
         // Get an instance of the writable database
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -106,7 +104,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         rowValues.put(COL_SONGS_FILEPATH, filePath);
         rowValues.put(COL_SONGS_TITLE, title);
         rowValues.put(COL_SONGS_ARTIST, artist);
-        rowValues.put(COL_SONGS_COMMENT, comment);
 
         // Insert the values into the Songs table
         db.insert(TABLE_NAME_SONGS, null, rowValues);
@@ -164,7 +161,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Open the readable database
         SQLiteDatabase db = this.getReadableDatabase();
         // Create an array of the column names
-        String[] selection = {COL_SONGS_FILEPATH, COL_SONGS_TITLE, COL_SONGS_ARTIST, COL_SONGS_COMMENT};
+        String[] selection = {COL_SONGS_FILEPATH, COL_SONGS_TITLE, COL_SONGS_ARTIST};
         // Create a cursor item for querying the database
         Cursor c = db.query(TABLE_NAME_SONGS,	//The name of the table to query
                 selection,				//The columns to return
@@ -186,7 +183,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             map.put("FilePath", c.getString(0));
             map.put("Title", c.getString(1));
             map.put("Artist", c.getString(2));
-            map.put("Comment", c.getString(3));
             // map.put("Age", String.valueOf(c.getInt(#)));  //For integer values
 
             lm.add(map);
@@ -212,7 +208,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Open the readable database
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String[] selectClause = {COL_SONGS_FILEPATH, COL_SONGS_TITLE, COL_SONGS_ARTIST, COL_SONGS_COMMENT}; // Create an array of the column names
+        String[] selectClause = {COL_SONGS_FILEPATH, COL_SONGS_TITLE, COL_SONGS_ARTIST}; // Create an array of the column names
         String[] whereClause = {filePath};                                          // Create a String array for the where clause
 
 
@@ -237,7 +233,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 map.put("FilePath", c.getString(0));
                 map.put("Title", c.getString(1));
                 map.put("Artist", c.getString(2));
-                map.put("Comment", c.getString(3));
                 // map.put("Age", String.valueOf(c.getInt(#)));  //For integer values
 
             lm.add(map);
@@ -260,8 +255,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // Open the readable database
         SQLiteDatabase db = this.getReadableDatabase();
-        // Create an array of the column names
-        String[] selection = {COL_TAGS_NAME};
+//        // Create an array of the column names
+//        String[] selection = {COL_TAGS_NAME};
 
 
         // Does a three-way join between the Tags, SongTags and Songs tables (many-to-many relationship)
@@ -289,7 +284,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 map.put("FilePath", c.getString(0));
                 map.put("Title", c.getString(1));
                 map.put("Artist", c.getString(2));
-                map.put("Comment", c.getString(3));
                 // map.put("Age", String.valueOf(c.getInt(#)));  //For integer values
 
                 lm.add(map);
@@ -307,19 +301,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    // Updates a Song's comment, using the given filepath (TODO:Soon to be deleted)
-    public void updateComment(String comment, String filePath)
-    {
-        // Open the readable database
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        String query = "UPDATE " + TABLE_NAME_SONGS +
-                       " SET " + COL_SONGS_COMMENT + " = '" + comment +
-                       "' WHERE " + COL_SONGS_FILEPATH + " = '" + filePath + "';";
-
-        db.execSQL(query);
-
-        // Close the database
-        db.close();
-    }
+//    // Updates a Song's comment, using the given filepath (TODO:Soon to be deleted)
+//    public void updateComment(String comment, String filePath)
+//    {
+//        // Open the readable database
+//        SQLiteDatabase db = this.getReadableDatabase();
+//
+//        String query = "UPDATE " + TABLE_NAME_SONGS +
+//                       " SET " + COL_SONGS_COMMENT + " = '" + comment +
+//                       "' WHERE " + COL_SONGS_FILEPATH + " = '" + filePath + "';";
+//
+//        db.execSQL(query);
+//
+//        // Close the database
+//        db.close();
+//    }
 }

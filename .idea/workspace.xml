@@ -19,8 +19,8 @@
       <file leaf-file-name="DatabaseHelper.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/ca/google/TagTunes/DatabaseHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="29" column="60" lean-forward="true" selection-start-line="29" selection-start-column="60" selection-end-line="30" selection-end-column="62" />
+            <state relative-caret-position="575">
+              <caret line="310" column="50" lean-forward="false" selection-start-line="310" selection-start-column="45" selection-end-line="310" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -2358,8 +2358,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ca/google/TagTunes/DatabaseHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="29" column="60" lean-forward="true" selection-start-line="29" selection-start-column="60" selection-end-line="30" selection-end-column="62" />
+        <state relative-caret-position="575">
+          <caret line="310" column="50" lean-forward="false" selection-start-line="310" selection-start-column="45" selection-end-line="310" selection-end-column="50" />
           <folding />
         </state>
       </provider>
