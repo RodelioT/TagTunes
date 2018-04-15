@@ -14,7 +14,7 @@ import java.util.Map;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DB_VERSION = 6;
+    private static final int DB_VERSION = 7;
 
     // Database Name
     private static final String DB_NAME = "SongDatabase";
@@ -256,9 +256,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // This method is used to return all tags associated with a song(its filepath)
-    public List<Map<String,String>> getTags(String filepath)
+    public ArrayList<String> getTags(String filepath)
     {
-        List<Map<String,String>> lm = new ArrayList<>();
+        ArrayList<String> tagList = new ArrayList<>();
 
         // Open the readable database
         SQLiteDatabase db = this.getReadableDatabase();
@@ -267,21 +267,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor c = db.rawQuery("SELECT Name " +
                                     "FROM SongTags " +
                                     "WHERE FilePath = '" + filepath + "';", null);
-
-//        Cursor c = db.rawQuery("SELECT Tags.Name " +
-//                "FROM Tags INNER JOIN SongTags ON Tags.Name = SongTags.Name " +
-//                "INNER JOIN Songs ON Songs.FilePath = SongTags.FilePath " +
-//                "WHERE Songs.FilePath = '" + filepath + "';", null);
-
-//        // Does a three-way join between the Tags, SongTags and Songs tables (many-to-many relationship)
-//        //   and selects all tags associated with one song (given the SongPath)
-//        Cursor c = db.rawQuery("SELECT t." + COL_TAGS_NAME +
-//                " FROM " + TABLE_NAME_TAGS + " as 't'" +
-//                " INNER JOIN " + TABLE_NAME_SONGTAGS + " as 'st'" +
-//                " ON t." + COL_TAGS_NAME + " = st." + COL_SONGTAGS_NAME +
-//                " INNER JOIN " + TABLE_NAME_SONGS + " as 's' " +
-//                " ON s." + COL_SONGS_FILEPATH + " = st." + COL_SONGTAGS_FILEPATH +
-//                " WHERE s." + COL_SONGS_FILEPATH + " = '" + filepath + "';", null);
 
 
         // Make sure it returned at least 1 row before doing operations on the result
@@ -292,13 +277,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             // For each row that was retrieved
             for(int i=0; i < c.getCount(); i++)
             {
-                Map<String,String> map = new HashMap<>();
+                String tag = c.getString(0);
+                tagList.add(tag);
 
-                // Assign the value to the corresponding array
-                map.put("Name", c.getString(0));
-                // map.put("Age", String.valueOf(c.getInt(#)));  //For integer values
-
-                lm.add(map);
                 c.moveToNext();
             }
         }
@@ -309,6 +290,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Close the database
         db.close();
 
-        return lm;
+        return tagList;
     }
 }

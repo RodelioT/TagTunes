@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SongInfoActivity extends AppCompatActivity {
@@ -38,19 +39,18 @@ public class SongInfoActivity extends AppCompatActivity {
         songArtist = dbHelper.getSong(songPath).get("Artist");
 
         //Getting all the tags, separating them with a space
-        Object[] tagArray = dbHelper.getTags(songPath).get(0).values().toArray();
-        tagList = Arrays.copyOf(tagArray, tagArray.length, String[].class);
-        for (String tag : tagList) {
-            // Tags should use underscores with spaces. Does a replace if they have spaces
-            tag = tag.replace(" ", "_");
-            songTags += tag + " ";
+        String tagList = "";
+        ArrayList<String> tagArray = dbHelper.getTags(songPath);
+
+        for (String tag : tagArray) {
+            tagList += tag.replace(" ", "_") + " ";
         }
 
         // Sets the text to the song information
         tvSongInfo.setText(songArtist + " - " + songTitle);
 
         // Lists all the tags in the tags editText (tags separated with spaces)
-        etTags.setText(songTags);
+        etTags.setText(tagList);
     }
 
     @Override

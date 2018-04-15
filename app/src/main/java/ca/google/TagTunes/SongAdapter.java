@@ -67,7 +67,13 @@ public class SongAdapter extends BaseAdapter {
         songView.setText(currentSong.getTitle());
         artistView.setText(currentSong.getArtist());
 
-        String tagList = Arrays.toString(dbHelper.getTags(currentSong.getPath()).get(0).values().toArray());
+        String tagList = "";
+        ArrayList<String> tagArray = dbHelper.getTags(currentSong.getPath());
+
+        for (String tag : tagArray) {
+            tagList += tag.replace(" ", "_") + " ";
+        }
+
         tagsView.setText(tagList);
 
         // Set index position as the tag
