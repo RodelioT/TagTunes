@@ -66,6 +66,9 @@ public class SongInfoActivity extends AppCompatActivity {
             dbHelper.insertTag(tag, songPath);
         }
 
+        // Removes any unused tags in the SongTags table
+        dbHelper.removeOldTags(tagArray, songPath);
+
         // Action performed when pressing the back button
         finish();
     }

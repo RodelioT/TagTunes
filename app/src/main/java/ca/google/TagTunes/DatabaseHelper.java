@@ -14,7 +14,7 @@ import java.util.Map;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DB_VERSION = 7;
+    private static final int DB_VERSION = 10;
 
     // Database Name
     private static final String DB_NAME = "SongDatabase";
@@ -89,9 +89,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-
-
-
     // Inserts a song into the Songs table using ContentValues
     public void insertSong(String filePath,String title, String artist) {
         // Get an instance of the writable database
@@ -106,13 +103,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         songRowValues.put(COL_SONGS_FILEPATH, filePath);
         songRowValues.put(COL_SONGS_TITLE, title);
         songRowValues.put(COL_SONGS_ARTIST, artist);
-        // Gives an initial tag to the song
-        songtagRowValues.put(COL_SONGTAGS_FILEPATH, filePath);
-        songtagRowValues.put(COL_SONGTAGS_NAME, "tag_me");
 
-        // Insert the values into the Songs table
-        db.insert(TABLE_NAME_SONGS, null, songRowValues);
-        db.insert(TABLE_NAME_SONGTAGS, null, songtagRowValues);
+        // If there's no errors inserting the song (i.e. song doesn't already exist)
+        if(db.insert(TABLE_NAME_SONGS, null, songRowValues) != -1) {
+            // Insert an initial tag_me tag for the song
+            songtagRowValues.put(COL_SONGTAGS_FILEPATH, filePath);
+            songtagRowValues.put(COL_SONGTAGS_NAME, "tag_me");
+            db.insert(TABLE_NAME_SONGTAGS, null, songtagRowValues);
+        }
 
         // Close the database
         db.close();
@@ -138,6 +136,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Inserts the values into the Tags and SongTags table
         db.insert(TABLE_NAME_TAGS, null, tagsRowValues);
         db.insert(TABLE_NAME_SONGTAGS, null, songtagsRowValues);
+
+        // Close the database
+        db.close();
+    }
+
+    // Removes a song's tags that are currently not being used
+    public void removeOldTags(String[] tags, String filePath) {
+
+        // Start creating the WHERE clause
+        String whereClause = "FilePath = '" + filePath + "' AND Name NOT IN(";
+        // Surrounds all the tags with quotes, and add commas and spaces between them,
+        //   and adds them to the NOT IN portion of the WHERE clause
+        for(String tag : tags) {
+            whereClause += "'" + tag + "', ";
+        }
+        // Removes the last set of ", " and places the closing bracket for the NOT IN clause
+        whereClause = whereClause.substring(0, whereClause.length() - 2) + ")";
+
+        // Get an instance of the writable database
+        SQLiteDatabase db = this.getWritableDatabase();
+
+//        // Selects all the tag names where the song (filepath) matches the song given
+//        db.execSQL("DELETE FROM SongTags " +
+//                        "WHERE FilePath = '" + filePath + "' " +
+//                        "AND Name NOT IN(" + formattedTags + ");");
+
+        db.delete(TABLE_NAME_SONGTAGS, whereClause, null);
 
         // Close the database
         db.close();
