@@ -198,11 +198,6 @@ public class MainActivity extends AppCompatActivity implements MediaController.M
                 // Call the class that was created in MusicService.java
                 musicSrv.setShuffle();
                 break;
-            case R.id.action_end:
-                stopService(playIntent);
-                musicSrv=null;
-                System.exit(0);
-                break;
         }
         return super.onOptionsItemSelected(item);
     }

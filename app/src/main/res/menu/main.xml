@@ -9,13 +9,6 @@
         android:title="@string/shuffle"
         app:showAsAction="always" />
 
-    <item
-        android:id="@+id/action_end"
-        android:icon="@drawable/end"
-        android:orderInCategory="2"
-        android:title="@string/end"
-        app:showAsAction="always" />
-
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
         app:showAsAction="never"/>
