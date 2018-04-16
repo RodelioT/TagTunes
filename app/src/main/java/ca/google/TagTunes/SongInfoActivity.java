@@ -1,7 +1,9 @@
 package ca.google.TagTunes;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -14,8 +16,6 @@ public class SongInfoActivity extends AppCompatActivity {
     EditText etTags;
 
     String songPath, songTitle, songArtist;
-    String songTags = "";
-    String[] tagList;
 
     DatabaseHelper dbHelper;
 
@@ -51,6 +51,7 @@ public class SongInfoActivity extends AppCompatActivity {
 
         // Lists all the tags in the tags editText (tags separated with spaces)
         etTags.setText(tagList);
+
     }
 
     @Override

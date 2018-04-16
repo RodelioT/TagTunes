@@ -7,6 +7,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements MediaController.M
     private SongAdapter songAdt; // Adapter of the ListView. Used to refresh the list when changes are made.
 
     private Toolbar myToolbar;
+    private SharedPreferences sharedPreferences;
 
     private MusicService musicSrv; // Represents the custom class we created
     private Intent playIntent; // The intent to play music within the MusicService class
@@ -149,6 +151,11 @@ public class MainActivity extends AppCompatActivity implements MediaController.M
             setController();
             paused = false;
         }
+        sharedPreferences = getSharedPreferences("sharedPreferencesData", 0);
+        if(sharedPreferences.getBoolean("showSongTags", true)) {
+
+        }
+
         songAdt.notifyDataSetChanged();
     }
 
@@ -198,6 +205,10 @@ public class MainActivity extends AppCompatActivity implements MediaController.M
                 // Call the class that was created in MusicService.java
                 musicSrv.setShuffle();
                 break;
+            case R.id.action_settings:
+                // Go to the settings Activity
+                Intent settingsActivity = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(settingsActivity);
         }
         return super.onOptionsItemSelected(item);
     }

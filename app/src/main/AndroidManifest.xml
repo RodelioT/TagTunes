@@ -29,7 +29,8 @@
         <!-- MusicService is required (make sure the package reflects your project's) -->
         <service android:name=".MusicService" />
 
-        <activity android:name=".SongInfoActivity"></activity>
+        <activity android:name=".SongInfoActivity" />
+        <activity android:name=".SettingsActivity"></activity>
     </application>
 
 </manifest>
