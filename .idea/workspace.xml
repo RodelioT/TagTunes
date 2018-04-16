@@ -32,11 +32,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/ca/google/TagTunes/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="35" column="16" lean-forward="false" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="16" />
+            <state relative-caret-position="374">
+              <caret line="154" column="27" lean-forward="false" selection-start-line="154" selection-start-column="27" selection-end-line="154" selection-end-column="27" />
               <folding>
                 <element signature="e#2847#3003#0" expanded="true" />
                 <element signature="e#3002#3003#0" expanded="true" />
@@ -44,27 +44,37 @@
                 <element signature="e#3837#3838#0" expanded="true" />
                 <element signature="e#3964#4577#0" expanded="true" />
                 <element signature="e#4576#4577#0" expanded="true" />
-                <element signature="e#6435#6436#0" expanded="true" />
-                <element signature="e#6477#6478#0" expanded="true" />
-                <element signature="e#8793#8937#0" expanded="true" />
-                <element signature="e#8936#8937#0" expanded="true" />
-                <element signature="e#8939#9083#0" expanded="true" />
-                <element signature="e#9082#9083#0" expanded="true" />
-                <element signature="e#9856#9857#0" expanded="true" />
-                <element signature="e#9885#9886#0" expanded="true" />
-                <element signature="e#10615#10616#0" expanded="true" />
-                <element signature="e#10649#10650#0" expanded="true" />
-                <element signature="e#10970#10971#0" expanded="true" />
-                <element signature="e#10994#10995#0" expanded="true" />
-                <element signature="e#11041#11042#0" expanded="true" />
-                <element signature="e#11068#11069#0" expanded="true" />
-                <element signature="e#11122#11123#0" expanded="true" />
-                <element signature="e#11149#11150#0" expanded="true" />
-                <element signature="e#11202#11203#0" expanded="true" />
-                <element signature="e#11229#11230#0" expanded="true" />
-                <element signature="e#11281#11282#0" expanded="true" />
-                <element signature="e#11305#11306#0" expanded="true" />
+                <element signature="e#6480#6481#0" expanded="true" />
+                <element signature="e#6522#6523#0" expanded="true" />
+                <element signature="e#8666#8810#0" expanded="true" />
+                <element signature="e#8809#8810#0" expanded="true" />
+                <element signature="e#8812#8956#0" expanded="true" />
+                <element signature="e#8955#8956#0" expanded="true" />
+                <element signature="e#9729#9730#0" expanded="true" />
+                <element signature="e#9758#9759#0" expanded="true" />
+                <element signature="e#10488#10489#0" expanded="true" />
+                <element signature="e#10522#10523#0" expanded="true" />
+                <element signature="e#10843#10844#0" expanded="true" />
+                <element signature="e#10867#10868#0" expanded="true" />
+                <element signature="e#10914#10915#0" expanded="true" />
+                <element signature="e#10941#10942#0" expanded="true" />
+                <element signature="e#10995#10996#0" expanded="true" />
+                <element signature="e#11022#11023#0" expanded="true" />
+                <element signature="e#11075#11076#0" expanded="true" />
+                <element signature="e#11102#11103#0" expanded="true" />
+                <element signature="e#11154#11155#0" expanded="true" />
+                <element signature="e#11178#11179#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MusicService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/ca/google/TagTunes/MusicService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="558">
+              <caret line="213" column="23" lean-forward="false" selection-start-line="213" selection-start-column="23" selection-end-line="213" selection-end-column="23" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -82,7 +92,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SongAdapter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="64" lean-forward="false" selection-start-line="2" selection-start-column="64" selection-end-line="2" selection-end-column="64" />
+              <folding>
+                <element signature="e#311#334#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SongAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/ca/google/TagTunes/SongAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-331">
@@ -118,6 +143,9 @@
       <find>onOptionsItemSelected</find>
       <find>adapter</find>
       <find>songAdt</find>
+      <find>shu</find>
+      <find>musicSrv</find>
+      <find>setSh</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2145,13 +2173,14 @@
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/ca/google/TagTunes/SettingsActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/ca/google/TagTunes/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/ca/google/TagTunes/SongAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/ca/google/TagTunes/SongInfoActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/ca/google/TagTunes/MusicService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/ca/google/TagTunes/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/main.xml" />
       </list>
     </option>
   </component>
@@ -2205,6 +2234,18 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
               <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="TagTunes" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="menu" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="TagTunes" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
           </expand>
           <select />
@@ -2409,7 +2450,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="22" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296582" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -2426,7 +2466,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.114072494" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.114072494" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find Sample Code" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296582" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296582" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -2477,7 +2517,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="12" />
+      <option name="time" value="14" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2571,26 +2611,26 @@
             <element signature="e#3837#3838#0" expanded="true" />
             <element signature="e#3964#4577#0" expanded="true" />
             <element signature="e#4576#4577#0" expanded="true" />
-            <element signature="e#6435#6436#0" expanded="true" />
-            <element signature="e#6477#6478#0" expanded="true" />
-            <element signature="e#8793#8937#0" expanded="true" />
-            <element signature="e#8936#8937#0" expanded="true" />
-            <element signature="e#8939#9083#0" expanded="true" />
-            <element signature="e#9082#9083#0" expanded="true" />
-            <element signature="e#9856#9857#0" expanded="true" />
-            <element signature="e#9885#9886#0" expanded="true" />
-            <element signature="e#10615#10616#0" expanded="true" />
-            <element signature="e#10649#10650#0" expanded="true" />
-            <element signature="e#10970#10971#0" expanded="true" />
-            <element signature="e#10994#10995#0" expanded="true" />
-            <element signature="e#11041#11042#0" expanded="true" />
-            <element signature="e#11068#11069#0" expanded="true" />
-            <element signature="e#11122#11123#0" expanded="true" />
-            <element signature="e#11149#11150#0" expanded="true" />
-            <element signature="e#11202#11203#0" expanded="true" />
-            <element signature="e#11229#11230#0" expanded="true" />
-            <element signature="e#11281#11282#0" expanded="true" />
-            <element signature="e#11305#11306#0" expanded="true" />
+            <element signature="e#6480#6481#0" expanded="true" />
+            <element signature="e#6522#6523#0" expanded="true" />
+            <element signature="e#8666#8810#0" expanded="true" />
+            <element signature="e#8809#8810#0" expanded="true" />
+            <element signature="e#8812#8956#0" expanded="true" />
+            <element signature="e#8955#8956#0" expanded="true" />
+            <element signature="e#9729#9730#0" expanded="true" />
+            <element signature="e#9758#9759#0" expanded="true" />
+            <element signature="e#10488#10489#0" expanded="true" />
+            <element signature="e#10522#10523#0" expanded="true" />
+            <element signature="e#10843#10844#0" expanded="true" />
+            <element signature="e#10867#10868#0" expanded="true" />
+            <element signature="e#10914#10915#0" expanded="true" />
+            <element signature="e#10941#10942#0" expanded="true" />
+            <element signature="e#10995#10996#0" expanded="true" />
+            <element signature="e#11022#11023#0" expanded="true" />
+            <element signature="e#11075#11076#0" expanded="true" />
+            <element signature="e#11102#11103#0" expanded="true" />
+            <element signature="e#11154#11155#0" expanded="true" />
+            <element signature="e#11178#11179#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2683,26 +2723,26 @@
             <element signature="e#3837#3838#0" expanded="true" />
             <element signature="e#3964#4577#0" expanded="true" />
             <element signature="e#4576#4577#0" expanded="true" />
-            <element signature="e#6435#6436#0" expanded="true" />
-            <element signature="e#6477#6478#0" expanded="true" />
-            <element signature="e#8793#8937#0" expanded="true" />
-            <element signature="e#8936#8937#0" expanded="true" />
-            <element signature="e#8939#9083#0" expanded="true" />
-            <element signature="e#9082#9083#0" expanded="true" />
-            <element signature="e#9856#9857#0" expanded="true" />
-            <element signature="e#9885#9886#0" expanded="true" />
-            <element signature="e#10615#10616#0" expanded="true" />
-            <element signature="e#10649#10650#0" expanded="true" />
-            <element signature="e#10970#10971#0" expanded="true" />
-            <element signature="e#10994#10995#0" expanded="true" />
-            <element signature="e#11041#11042#0" expanded="true" />
-            <element signature="e#11068#11069#0" expanded="true" />
-            <element signature="e#11122#11123#0" expanded="true" />
-            <element signature="e#11149#11150#0" expanded="true" />
-            <element signature="e#11202#11203#0" expanded="true" />
-            <element signature="e#11229#11230#0" expanded="true" />
-            <element signature="e#11281#11282#0" expanded="true" />
-            <element signature="e#11305#11306#0" expanded="true" />
+            <element signature="e#6480#6481#0" expanded="true" />
+            <element signature="e#6522#6523#0" expanded="true" />
+            <element signature="e#8666#8810#0" expanded="true" />
+            <element signature="e#8809#8810#0" expanded="true" />
+            <element signature="e#8812#8956#0" expanded="true" />
+            <element signature="e#8955#8956#0" expanded="true" />
+            <element signature="e#9729#9730#0" expanded="true" />
+            <element signature="e#9758#9759#0" expanded="true" />
+            <element signature="e#10488#10489#0" expanded="true" />
+            <element signature="e#10522#10523#0" expanded="true" />
+            <element signature="e#10843#10844#0" expanded="true" />
+            <element signature="e#10867#10868#0" expanded="true" />
+            <element signature="e#10914#10915#0" expanded="true" />
+            <element signature="e#10941#10942#0" expanded="true" />
+            <element signature="e#10995#10996#0" expanded="true" />
+            <element signature="e#11022#11023#0" expanded="true" />
+            <element signature="e#11075#11076#0" expanded="true" />
+            <element signature="e#11102#11103#0" expanded="true" />
+            <element signature="e#11154#11155#0" expanded="true" />
+            <element signature="e#11178#11179#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2711,14 +2751,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ca/google/TagTunes/MusicService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="26" column="26" lean-forward="false" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -2784,14 +2816,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -2803,71 +2827,11 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="36" lean-forward="false" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
-          <folding>
-            <element signature="e#310#327#0" expanded="false" />
-            <element signature="e#432#457#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ca/google/TagTunes/DatabaseHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
           <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/song.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ca/google/TagTunes/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="35" column="16" lean-forward="false" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="16" />
-          <folding>
-            <element signature="e#2847#3003#0" expanded="true" />
-            <element signature="e#3002#3003#0" expanded="true" />
-            <element signature="e#3371#3838#0" expanded="true" />
-            <element signature="e#3837#3838#0" expanded="true" />
-            <element signature="e#3964#4577#0" expanded="true" />
-            <element signature="e#4576#4577#0" expanded="true" />
-            <element signature="e#6435#6436#0" expanded="true" />
-            <element signature="e#6477#6478#0" expanded="true" />
-            <element signature="e#8793#8937#0" expanded="true" />
-            <element signature="e#8936#8937#0" expanded="true" />
-            <element signature="e#8939#9083#0" expanded="true" />
-            <element signature="e#9082#9083#0" expanded="true" />
-            <element signature="e#9856#9857#0" expanded="true" />
-            <element signature="e#9885#9886#0" expanded="true" />
-            <element signature="e#10615#10616#0" expanded="true" />
-            <element signature="e#10649#10650#0" expanded="true" />
-            <element signature="e#10970#10971#0" expanded="true" />
-            <element signature="e#10994#10995#0" expanded="true" />
-            <element signature="e#11041#11042#0" expanded="true" />
-            <element signature="e#11068#11069#0" expanded="true" />
-            <element signature="e#11122#11123#0" expanded="true" />
-            <element signature="e#11149#11150#0" expanded="true" />
-            <element signature="e#11202#11203#0" expanded="true" />
-            <element signature="e#11229#11230#0" expanded="true" />
-            <element signature="e#11281#11282#0" expanded="true" />
-            <element signature="e#11305#11306#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2898,11 +2862,86 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/song.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ca/google/TagTunes/SongAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-331">
           <caret line="21" column="36" lean-forward="false" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="64" lean-forward="false" selection-start-line="2" selection-start-column="64" selection-end-line="2" selection-end-column="64" />
+          <folding>
+            <element signature="e#311#334#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/ca/google/TagTunes/MusicService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="213" column="23" lean-forward="false" selection-start-line="213" selection-start-column="23" selection-end-line="213" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/ca/google/TagTunes/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="154" column="27" lean-forward="false" selection-start-line="154" selection-start-column="27" selection-end-line="154" selection-end-column="27" />
+          <folding>
+            <element signature="e#2847#3003#0" expanded="true" />
+            <element signature="e#3002#3003#0" expanded="true" />
+            <element signature="e#3371#3838#0" expanded="true" />
+            <element signature="e#3837#3838#0" expanded="true" />
+            <element signature="e#3964#4577#0" expanded="true" />
+            <element signature="e#4576#4577#0" expanded="true" />
+            <element signature="e#6480#6481#0" expanded="true" />
+            <element signature="e#6522#6523#0" expanded="true" />
+            <element signature="e#8666#8810#0" expanded="true" />
+            <element signature="e#8809#8810#0" expanded="true" />
+            <element signature="e#8812#8956#0" expanded="true" />
+            <element signature="e#8955#8956#0" expanded="true" />
+            <element signature="e#9729#9730#0" expanded="true" />
+            <element signature="e#9758#9759#0" expanded="true" />
+            <element signature="e#10488#10489#0" expanded="true" />
+            <element signature="e#10522#10523#0" expanded="true" />
+            <element signature="e#10843#10844#0" expanded="true" />
+            <element signature="e#10867#10868#0" expanded="true" />
+            <element signature="e#10914#10915#0" expanded="true" />
+            <element signature="e#10941#10942#0" expanded="true" />
+            <element signature="e#10995#10996#0" expanded="true" />
+            <element signature="e#11022#11023#0" expanded="true" />
+            <element signature="e#11075#11076#0" expanded="true" />
+            <element signature="e#11102#11103#0" expanded="true" />
+            <element signature="e#11154#11155#0" expanded="true" />
+            <element signature="e#11178#11179#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

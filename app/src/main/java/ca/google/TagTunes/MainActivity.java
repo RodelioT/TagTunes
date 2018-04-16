@@ -152,8 +152,8 @@ public class MainActivity extends AppCompatActivity implements MediaController.M
             paused = false;
         }
         sharedPreferences = getSharedPreferences("sharedPreferencesData", 0);
-        if(sharedPreferences.getBoolean("showSongTags", true)) {
-
+        if(musicSrv != null) {
+            musicSrv.setShuffle(sharedPreferences.getBoolean("shuffle", true));
         }
 
         songAdt.notifyDataSetChanged();
@@ -201,10 +201,6 @@ public class MainActivity extends AppCompatActivity implements MediaController.M
     public boolean onOptionsItemSelected(MenuItem item) {
         //menu item selected
         switch (item.getItemId()) {
-            case R.id.action_shuffle:
-                // Call the class that was created in MusicService.java
-                musicSrv.setShuffle();
-                break;
             case R.id.action_settings:
                 // Go to the settings Activity
                 Intent settingsActivity = new Intent(MainActivity.this, SettingsActivity.class);
