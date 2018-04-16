@@ -205,6 +205,12 @@ public class MainActivity extends AppCompatActivity implements MediaController.M
                 // Go to the settings Activity
                 Intent settingsActivity = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(settingsActivity);
+                break;
+            case R.id.action_search:
+                // Go to the search Activity
+                Intent searchActivity = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(searchActivity);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

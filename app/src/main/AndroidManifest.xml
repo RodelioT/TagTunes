@@ -30,7 +30,8 @@
         <service android:name=".MusicService" />
 
         <activity android:name=".SongInfoActivity" />
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".SearchActivity"></activity>
     </application>
 
 </manifest>
