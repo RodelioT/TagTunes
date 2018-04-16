@@ -209,9 +209,9 @@ public class MusicService extends Service implements
         playSong();
     }
 
-    public void setShuffle(){
+    public void setShuffle(boolean bool){
         // Toggles the shuffle setting
-        shuffle = !shuffle;
+        shuffle = bool;
     }
 
     @Override

@@ -9,13 +9,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit Tags"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
 
         <TextView
             android:id="@+id/tvEditComment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Edit Comment for" />
+            android:text="Edit tags for" />
 
         <TextView
             android:id="@+id/tvSongInfo"
@@ -28,5 +41,6 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName" />
+
     </LinearLayout>
 </ScrollView>

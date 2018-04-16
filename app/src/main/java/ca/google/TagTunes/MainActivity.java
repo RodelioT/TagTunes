@@ -7,6 +7,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -14,6 +15,9 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,11 +29,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class MainActivity extends Activity implements MediaController.MediaPlayerControl {
+public class MainActivity extends AppCompatActivity implements MediaController.MediaPlayerControl {
 
     private ArrayList<Song> songList; // ArrayList to hold all discovered music on the device
     private ListView songView; // ListView to display all the songs
     private SongAdapter songAdt; // Adapter of the ListView. Used to refresh the list when changes are made.
+
+    private Toolbar myToolbar;
+    private SharedPreferences sharedPreferences;
 
     private MusicService musicSrv; // Represents the custom class we created
     private Intent playIntent; // The intent to play music within the MusicService class
@@ -54,9 +61,14 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
             }
         }
 
-        // Initialize the dbHelper
+        // Initialize the dbHelper class
         dbHelper = new DatabaseHelper(this);
 
+        // Initializing the appbar
+        myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+
+        // Initializing the ListView
         songView = findViewById(R.id.song_list);
 
         // Instantiate the song ArrayList
@@ -115,6 +127,12 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
 
@@ -133,6 +151,11 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
             setController();
             paused = false;
         }
+        sharedPreferences = getSharedPreferences("sharedPreferencesData", 0);
+        if(musicSrv != null) {
+            musicSrv.setShuffle(sharedPreferences.getBoolean("shuffle", true));
+        }
+
         songAdt.notifyDataSetChanged();
     }
 
@@ -178,14 +201,15 @@ public class MainActivity extends Activity implements MediaController.MediaPlaye
     public boolean onOptionsItemSelected(MenuItem item) {
         //menu item selected
         switch (item.getItemId()) {
-            case R.id.action_shuffle:
-                // Call the class that was created in MusicService.java
-                musicSrv.setShuffle();
+            case R.id.action_settings:
+                // Go to the settings Activity
+                Intent settingsActivity = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(settingsActivity);
                 break;
-            case R.id.action_end:
-                stopService(playIntent);
-                musicSrv=null;
-                System.exit(0);
+            case R.id.action_search:
+                // Go to the search Activity
+                Intent searchActivity = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(searchActivity);
                 break;
         }
         return super.onOptionsItemSelected(item);

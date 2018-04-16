@@ -2,4 +2,10 @@
     <string name="app_name">TagTunes</string>
     <string name="shuffle">Shuffle</string>
     <string name="end">End</string>
+    <string name="action_search">Search Tags</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="SearchStyles">
+        <item>Any</item>
+        <item>All</item>
+    </string-array>
 </resources>
