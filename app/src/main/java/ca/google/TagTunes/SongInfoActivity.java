@@ -1,6 +1,9 @@
 package ca.google.TagTunes;
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +21,10 @@ public class SongInfoActivity extends AppCompatActivity {
     private EditText etTags;
     private Button btnOnlineSearch;
 
+    // Used to check if an internet connection is established
+    private ConnectivityManager connectivityManager;
+    private NetworkInfo activeNetwork;
+
     private String songPath, songTitle, songArtist;
 
     private DatabaseHelper dbHelper;
@@ -33,6 +40,10 @@ public class SongInfoActivity extends AppCompatActivity {
         // Initializing views
         tvSongInfo = findViewById(R.id.tvSongInfo);
         etTags = findViewById(R.id.etTags);
+        btnOnlineSearch = findViewById(R.id.btnOnlineSearch);
+
+        //For checking to see if a connection is established
+        connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 
         // Getting the song path passed through the intent
         songPath = getIntent().getStringExtra("songPath");
@@ -58,7 +69,15 @@ public class SongInfoActivity extends AppCompatActivity {
         btnOnlineSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(SongInfoActivity.this, songArtist + " - " + songTitle, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(SongInfoActivity.this, songArtist + " - " + songTitle, Toast.LENGTH_SHORT).show();
+
+                // Checks to see if an internet connection is established
+                activeNetwork = connectivityManager.getActiveNetworkInfo();
+                if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+                    Toast.makeText(SongInfoActivity.this, "YES Internet!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(SongInfoActivity.this, "No internet...", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
