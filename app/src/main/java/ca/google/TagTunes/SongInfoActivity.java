@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,8 +18,17 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 public class SongInfoActivity extends AppCompatActivity {
 
@@ -30,6 +41,7 @@ public class SongInfoActivity extends AppCompatActivity {
     private NetworkInfo activeNetwork;
 
     private String songPath, songTitle, songArtist;
+    private final String LASTFM_API_KEY = "83e9e4c79dfd81d4ffd62f211dd893e2";
     private ArrayList<String> onlineTags;
 
     private DatabaseHelper dbHelper;
@@ -63,7 +75,7 @@ public class SongInfoActivity extends AppCompatActivity {
         }
 
         // Sets the text to the song information
-        tvSongInfo.setText(songArtist + " - " + songTitle);
+        tvSongInfo.setText(String.format("%s - %s", songArtist, songTitle));
 
         // Lists all the tags in the tags editText (tags separated with spaces)
         etTags.setText(tagList);
@@ -72,10 +84,20 @@ public class SongInfoActivity extends AppCompatActivity {
         btnOnlineSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Toast.makeText(SongInfoActivity.this, songArtist + " - " + songTitle, Toast.LENGTH_SHORT).show();
 
                 if(internetConnected()) {
-                    Toast.makeText(SongInfoActivity.this, songArtist + " - " + songTitle, Toast.LENGTH_SHORT).show();
+                    // Fetches tags from Last.fm's API, and stores it in the onlineTags ArrayList
+                    ProcessLastfmTags processLastfmTags = new ProcessLastfmTags();
+                    processLastfmTags.execute();
+
+                    if(onlineTags != null) {
+                        for(String tag : onlineTags) {
+                            etTags.setText(String.format("%s %s", etTags.getText().toString(), tag));
+                        }
+                    } else {
+                        Toast.makeText(SongInfoActivity.this, "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         });
@@ -102,6 +124,59 @@ public class SongInfoActivity extends AppCompatActivity {
         finish();
     }
 
+    class ProcessLastfmTags extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            URL url = null;
+            SAXParser saxParser = null;
+            HttpURLConnection connection = null;
+            InputStream inputStream = null;
+
+            String song = songTitle.replace(" ", "+");
+            String artist = songArtist.replace(" ", "+");;
+            String feedSource = "http://ws.audioscrobbler.com/2.0/?method=track.gettoptags&artist=" + artist + "&track=" + song + "&api_key=" + LASTFM_API_KEY;
+
+            try {
+                url = new URL(feedSource);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            try {
+                saxParser = SAXParserFactory.newInstance().newSAXParser();
+            } catch (ParserConfigurationException | SAXException e) {
+                e.printStackTrace();
+            }
+            try {
+                connection = (HttpURLConnection)url.openConnection();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                inputStream = connection.getInputStream();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            LastfmHandler lastfmHandler = new LastfmHandler();
+            try {
+                saxParser.parse(inputStream, lastfmHandler);
+            } catch (SAXException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+    }
 
     class LastfmHandler extends DefaultHandler {
         // Flags to keep track of what elements we are in
@@ -149,7 +224,7 @@ public class SongInfoActivity extends AppCompatActivity {
             switch(qName) {
                 case "tag":
                     inEntry = false;
-                    onlineTags.add(name);
+                    onlineTags.add(name.replace(" ", "_"));
                     break;
                 case "name":
                     inTagName = false;
