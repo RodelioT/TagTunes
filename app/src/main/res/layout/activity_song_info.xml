@@ -40,7 +40,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="ex: study_tunes instrumental classical"
             android:inputType="textPersonName" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:id="@+id/tvSearchOnline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search up more info about this song online:" />
+
+        <Button
+            android:id="@+id/btnOnlineSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search online for this song" />
 
     </LinearLayout>
 </ScrollView>

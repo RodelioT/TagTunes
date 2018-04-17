@@ -4,20 +4,23 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SongInfoActivity extends AppCompatActivity {
 
-    TextView tvSongInfo;
-    EditText etTags;
+    private TextView tvSongInfo;
+    private EditText etTags;
+    private Button btnOnlineSearch;
 
-    String songPath, songTitle, songArtist;
+    private String songPath, songTitle, songArtist;
 
-    DatabaseHelper dbHelper;
+    private DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,6 @@ public class SongInfoActivity extends AppCompatActivity {
         //Getting all the tags, separating them with a space
         String tagList = "";
         ArrayList<String> tagArray = dbHelper.getTags(songPath);
-
         for (String tag : tagArray) {
             tagList += tag.replace(" ", "_") + " ";
         }
@@ -51,6 +53,14 @@ public class SongInfoActivity extends AppCompatActivity {
 
         // Lists all the tags in the tags editText (tags separated with spaces)
         etTags.setText(tagList);
+
+        // Sets up an event listener for the Button
+        btnOnlineSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(SongInfoActivity.this, songArtist + " - " + songTitle, Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
