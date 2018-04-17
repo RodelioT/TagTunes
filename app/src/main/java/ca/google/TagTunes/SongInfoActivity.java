@@ -12,6 +12,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -26,6 +30,7 @@ public class SongInfoActivity extends AppCompatActivity {
     private NetworkInfo activeNetwork;
 
     private String songPath, songTitle, songArtist;
+    private ArrayList<String> onlineTags;
 
     private DatabaseHelper dbHelper;
 
@@ -96,6 +101,76 @@ public class SongInfoActivity extends AppCompatActivity {
         // Action performed when pressing the back button
         finish();
     }
+
+
+    class LastfmHandler extends DefaultHandler {
+        // Flags to keep track of what elements we are in
+        private boolean inEntry, inTagName;
+        private String name;
+        private StringBuilder stringBuilder;
+
+        // Initialization block
+        {
+            onlineTags = new ArrayList<>(10);
+        }
+
+        @Override
+        public void startDocument() throws SAXException {
+            super.startDocument();
+        }
+
+        @Override
+        public void endDocument() throws SAXException {
+            super.endDocument();
+
+        }
+
+        @Override
+        public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+            super.startElement(uri, localName, qName, attributes);
+
+            switch(qName) {
+                case "tag":
+                    inEntry = true;
+                    break;
+                case "name":
+                    inTagName = true;
+                    stringBuilder = new StringBuilder(25);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        @Override
+        public void endElement(String uri, String localName, String qName) throws SAXException {
+            super.endElement(uri, localName, qName);
+
+            switch(qName) {
+                case "tag":
+                    inEntry = false;
+                    onlineTags.add(name);
+                    break;
+                case "name":
+                    inTagName = false;
+                    name = (stringBuilder.toString());
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        @Override
+        public void characters(char[] ch, int start, int length) throws SAXException {
+            super.characters(ch, start, length);
+
+            if(inEntry && inTagName) {
+                stringBuilder.append(ch, start, length);
+            }
+        }
+
+    }
+
 
     // Checks to see if an internet connection is established.
     public boolean internetConnected() {

@@ -51,11 +51,11 @@
       <file leaf-file-name="SongInfoActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/ca/google/TagTunes/SongInfoActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="72" column="30" lean-forward="false" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
+            <state relative-caret-position="17">
+              <caret line="94" column="13" lean-forward="true" selection-start-line="94" selection-start-column="13" selection-end-line="94" selection-end-column="13" />
               <folding>
-                <element signature="e#2222#2636#0" expanded="true" />
-                <element signature="e#2635#2636#0" expanded="true" />
+                <element signature="e#2372#2786#0" expanded="true" />
+                <element signature="e#2785#2786#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2438,11 +2438,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ca/google/TagTunes/SongInfoActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="72" column="30" lean-forward="false" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
+        <state relative-caret-position="17">
+          <caret line="94" column="13" lean-forward="true" selection-start-line="94" selection-start-column="13" selection-end-line="94" selection-end-column="13" />
           <folding>
-            <element signature="e#2222#2636#0" expanded="true" />
-            <element signature="e#2635#2636#0" expanded="true" />
+            <element signature="e#2372#2786#0" expanded="true" />
+            <element signature="e#2785#2786#0" expanded="true" />
           </folding>
         </state>
       </provider>
