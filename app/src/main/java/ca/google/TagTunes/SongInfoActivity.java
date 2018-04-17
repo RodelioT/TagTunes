@@ -42,8 +42,6 @@ public class SongInfoActivity extends AppCompatActivity {
         etTags = findViewById(R.id.etTags);
         btnOnlineSearch = findViewById(R.id.btnOnlineSearch);
 
-        //For checking to see if a connection is established
-        connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 
         // Getting the song path passed through the intent
         songPath = getIntent().getStringExtra("songPath");
@@ -71,12 +69,8 @@ public class SongInfoActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                Toast.makeText(SongInfoActivity.this, songArtist + " - " + songTitle, Toast.LENGTH_SHORT).show();
 
-                // Checks to see if an internet connection is established
-                activeNetwork = connectivityManager.getActiveNetworkInfo();
-                if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-                    Toast.makeText(SongInfoActivity.this, "YES Internet!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(SongInfoActivity.this, "No internet...", Toast.LENGTH_SHORT).show();
+                if(internetConnected()) {
+                    Toast.makeText(SongInfoActivity.this, songArtist + " - " + songTitle, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -103,5 +97,22 @@ public class SongInfoActivity extends AppCompatActivity {
         finish();
     }
 
-    //TODO: Make two buttons, one to save, one to cancel, and then make the back button ask the user to save or not
+    // Checks to see if an internet connection is established.
+    public boolean internetConnected() {
+        boolean connection = false;
+
+        //For checking to see if a connection is established
+        connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        // Checks to see if an internet connection is established before connecting online
+        activeNetwork = connectivityManager.getActiveNetworkInfo();
+        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+            connection = true;
+        } else {
+            Toast.makeText(SongInfoActivity.this, "No internet connection.\nPlease check your connection settings.", Toast.LENGTH_SHORT).show();
+        }
+
+        return connection;
+    }
+
 }
